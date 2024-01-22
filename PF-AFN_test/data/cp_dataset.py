@@ -2,13 +2,14 @@
 import torch
 import torch.utils.data as data
 import torchvision.transforms as transforms
+from torchvision.transforms import InterpolationMode
 
 from PIL import Image, ImageDraw
 import json
 
 import os.path as osp
 import numpy as np
-
+67
 
 class CPDataset(data.Dataset):
     """
@@ -233,10 +234,10 @@ class CPDataset(data.Dataset):
         result = {
             'c_name': c_name,  # for visualization
             'im_name': im_name,  # for visualization or ground truth
-            # intput 1 (clothfloww)
+            # input 1 (clothflow)
             'cloth': c,  # for input
             'cloth_mask': cm,  # for input
-            # intput 2 (segnet)
+            # input 2 (segnet)
             'parse_agnostic': new_parse_agnostic_map,
             'densepose': densepose_map,
             'pose': pose_map,  # for conditioning
@@ -386,7 +387,7 @@ class CPDatasetTest(data.Dataset):
         result = {
             'c_name': c_name,  # for visualization
             'im_name': im_name,  # for visualization or ground truth
-            # intput 1 (clothfloww)
+            # input 1 (clothfloww)
             'cloth': c,  # for input
             'cloth_mask': cm,  # for input
             # intput 2 (segnet)
@@ -425,9 +426,8 @@ class CPDataLoader(object):
 
     def next_batch(self):
         try:
-            batch = self.data_iter.__next__()
+            return next(self.data_iter)
         except StopIteration:
-            self.data_iter = self.data_loader.__iter__()
-            batch = self.data_iter.__next__()
+            self.data_iter = iter(self.data_loader)
+            return next(self.data_iter)
 
-        return batch

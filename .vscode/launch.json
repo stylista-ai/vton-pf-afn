@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Eval PBAFN Viton",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/PF-AFN_test/eval_PBAFN_viton.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--name=cloth-warp",
+                "--resize_or_crop=none",
+                "--batchSize=32",
+                "--gpu_ids=0",
+                "--warp_checkpoint=PF-AFN_test/checkpoints/warp_viton.pth",
+                "--label_nc=13",
+                "--dataroot=/home/ext_rleifer_gmail_com/zalando-hd-resized/",
+                "--fineSize=512",
+                "--unpaired"
+            ]
+        }
+    ]
+}

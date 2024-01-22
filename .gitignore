@@ -1,3 +1,6 @@
 *.ckpt
 *.pth
 *.pyc
+results/*
+results*
+*.jpg
