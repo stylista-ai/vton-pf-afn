@@ -22,7 +22,7 @@ def create_dataset(opt):
 
 def setup_data_loader(opt, dataset):
     return DataLoader(
-        dataset, batch_size=opt.batchSize, shuffle=False, num_workers=1, pin_memory=True
+        dataset, batch_size=opt.batchSize, shuffle=False, num_workers=0, pin_memory=True
     )
 
 
@@ -175,4 +175,4 @@ if __name__ == "__main__":
                 logger.debug(
                     f"Processing data: {time.time() - start_time:.2f}s for {len(data['image'])} items"
                 )
-        save_results(warped_cloth, warped_mask, data["image_name"], opt)
+        save_results(warped_cloth, warped_mask, data["c_name"]["unpaired"], opt)
