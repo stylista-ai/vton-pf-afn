@@ -126,7 +126,7 @@ def warp_clothes(model: AFWM, inputs: dict):
 
 
 def save_results(warped_cloth, warped_mask, image_names, opt):
-    path = f"results/{opt.name}"
+    path = os.path.join(opt.outdir, opt.name)
     mask_path = f"{path}-mask"
     os.makedirs(path, exist_ok=True)
     os.makedirs(mask_path, exist_ok=True)
